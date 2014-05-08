@@ -50,14 +50,16 @@ public class BrainInputMainActivity extends ActionBarActivity {
         flickerViewButtomRight = (FlickeringView) findViewById(R.id.bottomRightView);
 
         aATopLeft = new AlphaAnimation(0.0f,1.0f);
-        aATopLeft.setDuration(5000/60);
+        aATopLeft.setDuration(5000/60); //6hz
         aATopLeft.setRepeatCount(Animation.INFINITE);
         aATopLeft.setRepeatMode(Animation.REVERSE);
 //        flickerViewTopLeft.setAnimation(aATopLeft);
 //        aATopLeft.start();
 
+        // 5000/10 = 1hz
+
         aATopRight = new AlphaAnimation(0.0f,1.0f);
-        aATopRight.setDuration(5000/70);
+        aATopRight.setDuration(5000/70);  // duration is half period
         aATopRight.setRepeatCount(Animation.INFINITE);
         aATopRight.setRepeatMode(Animation.REVERSE);
 //        flickerViewTopRight.setAnimation(aATopRight);
