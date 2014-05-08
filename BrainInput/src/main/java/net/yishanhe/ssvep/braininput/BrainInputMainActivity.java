@@ -1,10 +1,12 @@
 package net.yishanhe.ssvep.braininput;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.View;
@@ -12,25 +14,26 @@ import android.widget.Button;
 import android.widget.Toast;
 
 
+
 public class BrainInputMainActivity extends ActionBarActivity {
 
 
-    private AlphaAnimation aATopRight;
-    private FlickeringView flickerViewTopRight;
+    private AlphaAnimation aATop;
+    private FlickeringView flickerViewTop;
 
-    private AlphaAnimation aATopLeft;
-    private FlickeringView flickerViewTopLeft;
+    private AlphaAnimation aAMiddle;
+    private FlickeringView flickerViewMiddle;
 
-    private AlphaAnimation aAButtomLeft;
-    private FlickeringView flickerViewButtomLeft;
+    private AlphaAnimation aAButtom;
+    private FlickeringView flickerViewButtom;
 
-    private AlphaAnimation aAButtomRight;
-    private FlickeringView flickerViewButtomRight;
+
 
     private Button controlBTN;
     private boolean controlFlag = true;
     private Activity activity = this;
 
+    final int boxColor = Color.BLACK;
 
 
     @Override
@@ -38,31 +41,32 @@ public class BrainInputMainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_brain_input_main);
 
-        flickerViewTopLeft = (FlickeringView) findViewById(R.id.topLeftView);
-        flickerViewTopRight = (FlickeringView) findViewById(R.id.topRightView);
-        flickerViewButtomLeft = (FlickeringView) findViewById(R.id.bottomLeftView);
-        flickerViewButtomRight = (FlickeringView) findViewById(R.id.bottomRightView);
+        // turn off title to provide more visible area
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        aATopLeft = new AlphaAnimation(0.0f,1.0f);
-        aATopLeft.setDuration(5000/60); //6hz
-        aATopLeft.setRepeatCount(Animation.INFINITE);
-        aATopLeft.setRepeatMode(Animation.REVERSE);
+
+
+        flickerViewTop = (FlickeringView) findViewById(R.id.topBoxView);
+
+        flickerViewMiddle = (FlickeringView) findViewById(R.id.midBoxView);
+        flickerViewButtom = (FlickeringView) findViewById(R.id.botBoxView);
+
+
+        aATop = new AlphaAnimation(0.0f,1.0f);
+        aATop.setDuration(5000/60); //6hz
+        aATop.setRepeatCount(Animation.INFINITE);
+        aATop.setRepeatMode(Animation.REVERSE);
         // 5000/10 = 1hz
 
-        aATopRight = new AlphaAnimation(0.0f,1.0f);
-        aATopRight.setDuration(5000/70);  // duration is half period
-        aATopRight.setRepeatCount(Animation.INFINITE);
-        aATopRight.setRepeatMode(Animation.REVERSE);
+        aAMiddle = new AlphaAnimation(0.0f,1.0f);
+        aAMiddle.setDuration(5000/80);
+        aAMiddle.setRepeatCount(Animation.INFINITE);
+        aAMiddle.setRepeatMode(Animation.REVERSE);
 
-        aAButtomLeft = new AlphaAnimation(0.0f,1.0f);
-        aAButtomLeft.setDuration(5000/80);
-        aAButtomLeft.setRepeatCount(Animation.INFINITE);
-        aAButtomLeft.setRepeatMode(Animation.REVERSE);
-
-        aAButtomRight = new AlphaAnimation(0.0f,1.0f);
-        aAButtomRight.setDuration(5000/90);
-        aAButtomRight.setRepeatCount(Animation.INFINITE);
-        aAButtomRight.setRepeatMode(Animation.REVERSE);
+        aAButtom = new AlphaAnimation(0.0f,1.0f);
+        aAButtom.setDuration(5000/100);
+        aAButtom.setRepeatCount(Animation.INFINITE);
+        aAButtom.setRepeatMode(Animation.REVERSE);
 
 
         // @TODO using OPENGL ES
@@ -73,23 +77,23 @@ public class BrainInputMainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 if (controlFlag == true){
-                    Toast.makeText(activity, "Start flickering.", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(activity, "Start flickering.", Toast.LENGTH_SHORT).show();
                     controlFlag = false;
                     controlBTN.setText("Stop");
                     // Start action here
-                    flickerViewTopLeft.startAnimation(aATopLeft);
-                    flickerViewTopRight.startAnimation(aATopRight);
-                    flickerViewButtomLeft.startAnimation(aAButtomLeft);
-                    flickerViewButtomRight.startAnimation(aAButtomRight);
+                    flickerViewTop.startAnimation(aATop);
+                    flickerViewMiddle.startAnimation(aAMiddle);
+                    flickerViewButtom.startAnimation(aAButtom);
+
                 }else{
-                    Toast.makeText(activity, "Stop flickering,", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(activity, "Stop flickering,", Toast.LENGTH_SHORT).show();
                     controlFlag = true;
                     controlBTN.setText("Start");
                     // Stop action here
-                    flickerViewTopLeft.clearAnimation();
-                    flickerViewTopRight.clearAnimation();
-                    flickerViewButtomRight.clearAnimation();
-                    flickerViewButtomLeft.clearAnimation();
+                    flickerViewTop.clearAnimation();
+                    flickerViewMiddle.clearAnimation();
+                    flickerViewButtom.clearAnimation();
+
                 }
             }
         });
