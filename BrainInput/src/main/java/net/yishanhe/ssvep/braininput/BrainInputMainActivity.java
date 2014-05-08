@@ -1,8 +1,6 @@
 package net.yishanhe.ssvep.braininput;
 
-import android.animation.ObjectAnimator;
 import android.app.Activity;
-import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,13 +10,10 @@ import android.view.animation.Animation;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-import android.animation.AnimatorSet;
 
 
 public class BrainInputMainActivity extends ActionBarActivity {
 
-
-//    private FlickeringView flickerViewTest;
 
     private AlphaAnimation aATopRight;
     private FlickeringView flickerViewTopRight;
@@ -35,7 +30,6 @@ public class BrainInputMainActivity extends ActionBarActivity {
     private Button controlBTN;
     private boolean controlFlag = true;
     private Activity activity = this;
-//    private ObjectAnimator oa;
 
 
 
@@ -53,48 +47,25 @@ public class BrainInputMainActivity extends ActionBarActivity {
         aATopLeft.setDuration(5000/60); //6hz
         aATopLeft.setRepeatCount(Animation.INFINITE);
         aATopLeft.setRepeatMode(Animation.REVERSE);
-//        flickerViewTopLeft.setAnimation(aATopLeft);
-//        aATopLeft.start();
-
         // 5000/10 = 1hz
 
         aATopRight = new AlphaAnimation(0.0f,1.0f);
         aATopRight.setDuration(5000/70);  // duration is half period
         aATopRight.setRepeatCount(Animation.INFINITE);
         aATopRight.setRepeatMode(Animation.REVERSE);
-//        flickerViewTopRight.setAnimation(aATopRight);
-//        aATopRight.start();
 
         aAButtomLeft = new AlphaAnimation(0.0f,1.0f);
         aAButtomLeft.setDuration(5000/80);
         aAButtomLeft.setRepeatCount(Animation.INFINITE);
         aAButtomLeft.setRepeatMode(Animation.REVERSE);
-//        flickerViewButtomLeft.setAnimation(aAButtomLeft);
-//        aAButtomLeft.start();
 
         aAButtomRight = new AlphaAnimation(0.0f,1.0f);
         aAButtomRight.setDuration(5000/90);
         aAButtomRight.setRepeatCount(Animation.INFINITE);
         aAButtomRight.setRepeatMode(Animation.REVERSE);
-//        flickerViewButtomRight.setAnimation(aAButtomRight);
-//        aAButtomLeft.start();
 
 
-
-        // TEST
-//        flickerView.ofInt(target, propertyName, 0, 10).setDuration(500).start().
-//        oa = new ObjectAnimator();
-//        oa.ofInt(flickerView, "InnerRectColor", Color.RED, Color.BLACK).setDuration(3000).start();
-//        oa.ofInt(flickerView, "OuterRectColor", Color.BLACK, Color.RED).setDuration(3000).start();
-
-
-//        flickerViewTest = (FlickeringView) findViewById(R.id.topLeftView);
-//        ObjectAnimator animX = ObjectAnimator.ofInt(flickerViewTest, "InnerRectColor", Color.RED, Color.BLACK).setDuration(3000);
-//        ObjectAnimator animY = ObjectAnimator.ofInt(flickerViewTest, "OuterRectColor", Color.BLACK, Color.RED).setDuration(3000);
-//        AnimatorSet animSetXY = new AnimatorSet();
-//        animSetXY.playTogether(animX, animY);
-//        animSetXY.start();
-
+        // @TODO using OPENGL ES
 
 
         controlBTN = (Button) findViewById(R.id.control);
@@ -110,9 +81,6 @@ public class BrainInputMainActivity extends ActionBarActivity {
                     flickerViewTopRight.startAnimation(aATopRight);
                     flickerViewButtomLeft.startAnimation(aAButtomLeft);
                     flickerViewButtomRight.startAnimation(aAButtomRight);
-
-
-
                 }else{
                     Toast.makeText(activity, "Stop flickering,", Toast.LENGTH_SHORT).show();
                     controlFlag = true;
