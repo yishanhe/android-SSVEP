@@ -1,66 +1,161 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bi="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:background="@color/Black"
-    tools:context="net.yishanhe.ssvep.braininput.BrainInputMainActivity">
+    tools:context="net.yishanhe.ssvep.braininput.BrainInputMainActivity"
+    android:weightSum="1">
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <!--<LinearLayout-->
+        <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_gravity="center_horizontal|center_vertical"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical">-->
+
+            <!--<LinearLayout-->
+                <!--android:background="@color/Black"-->
+                <!--android:layout_width="1100dp"-->
+                <!--android:layout_gravity="center_horizontal|center_vertical"-->
+                <!--android:layout_height="1100dp"-->
+                <!--android:id="@+id/topBox">-->
+
+                <!--<view-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="25dp"-->
+                    <!--class="net.yishanhe.ssvep.braininput.FlickeringView"-->
+                    <!--android:id="@+id/topBoxView" />-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:background="@color/Black"-->
+                <!--android:layout_width="1100dp"-->
+                <!--android:layout_height="1100dp"-->
+                <!--android:layout_gravity="center_horizontal|center_vertical"-->
+                <!--android:id="@+id/midBox">-->
+
+                <!--<view-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="25dp"-->
+                    <!--class="net.yishanhe.ssvep.braininput.FlickeringView"-->
+                    <!--android:id="@+id/midBoxView" />-->
+            <!--</LinearLayout>-->
+
+
+
+            <!--<LinearLayout-->
+                <!--android:background="@color/Black"-->
+                <!--android:layout_width="1100dp"-->
+                <!--android:layout_height="1100dp"-->
+                <!--android:layout_gravity="center_horizontal|center_vertical"-->
+                <!--android:id="@+id/botBox">-->
+
+                <!--<view-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="25dp"-->
+                    <!--class="net.yishanhe.ssvep.braininput.FlickeringView"-->
+                    <!--android:id="@+id/botBoxView" />-->
+            <!--</LinearLayout>-->
+
+    <!--</LinearLayout>-->
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_gravity="center_horizontal|center_vertical"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="342dp"
+        android:layout_weight="1.01">
 
-            <LinearLayout
-                android:background="@color/Black"
-                android:layout_width="150dp"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_height="150dp"
-                android:id="@+id/topBox">
+        <RelativeLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/Red"
+            android:id="@+id/middlerect">
 
-                <view
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="25dp"
-                    class="net.yishanhe.ssvep.braininput.FlickeringView"
-                    android:id="@+id/topBoxView" />
-            </LinearLayout>
+            <view
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                class="net.yishanhe.ssvep.braininput.FlickeringViewInner"
+                bi:initialColor="@color/White"
+                android:id="@+id/view"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
 
-            <LinearLayout
-                android:background="@color/Black"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:id="@+id/midBox">
+        <RelativeLayout
+            android:background="@color/White"
+            android:layout_width="100dp"
+            android:layout_height="200dp"
+            android:layout_alignBottom="@+id/middlerect"
+            android:layout_toLeftOf="@+id/middlerect"
+            android:id="@+id/leftuprect">
 
-                <view
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="25dp"
-                    class="net.yishanhe.ssvep.braininput.FlickeringView"
-                    android:id="@+id/midBoxView" />
-            </LinearLayout>
+            <view
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                class="net.yishanhe.ssvep.braininput.FlickeringView"
+                android:id="@+id/view2"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
 
+        <RelativeLayout
+            android:background="@color/White"
+            android:layout_width="100dp"
+            android:layout_height="200dp"
+            android:layout_alignTop="@+id/middlerect"
+            android:layout_toRightOf="@+id/middlerect"
+            android:id="@+id/rightbottomrect">
 
+            <view
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                class="net.yishanhe.ssvep.braininput.FlickeringView"
+                android:id="@+id/view3"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
 
-            <LinearLayout
-                android:background="@color/Black"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:id="@+id/botBox">
+        <RelativeLayout
+            android:background="@color/White"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:id="@+id/rightuprect"
+            android:layout_above="@+id/middlerect"
+            android:layout_alignLeft="@+id/middlerect">
 
-                <view
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="25dp"
-                    class="net.yishanhe.ssvep.braininput.FlickeringView"
-                    android:id="@+id/botBoxView" />
-            </LinearLayout>
+            <view
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                class="net.yishanhe.ssvep.braininput.FlickeringView"
+                android:id="@+id/view4"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
 
-    </LinearLayout>
+        <RelativeLayout
+            android:background="@color/White"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:id="@+id/leftbottomrect"
+            android:layout_below="@+id/middlerect"
+            android:layout_toLeftOf="@+id/rightbottomrect">
+
+            <view
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                class="net.yishanhe.ssvep.braininput.FlickeringView"
+                android:id="@+id/view5"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+        
+
+    </RelativeLayout>
 
     <LinearLayout
         android:background="@color/Black"

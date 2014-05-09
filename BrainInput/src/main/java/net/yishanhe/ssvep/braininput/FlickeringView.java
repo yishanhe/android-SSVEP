@@ -40,10 +40,6 @@ public class FlickeringView extends View{
 
         // background set as black
         canvas.drawColor(outerRectColor);
-        int canvasWidth = canvas.getWidth();
-        int canvasHeight = canvas.getHeight();
-        Log.d(TAG, "WidthxHeight:"+ Integer.toString(canvasWidth) + "x" + Integer.toString(canvasHeight) );
-        // 720x1000 Galaxy Nexus
 
         int boxBoarderWidth = 0; // please change it in the xml. better.
 
