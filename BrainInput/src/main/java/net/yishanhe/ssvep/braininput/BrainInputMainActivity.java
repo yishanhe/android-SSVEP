@@ -1,34 +1,36 @@
 package net.yishanhe.ssvep.braininput;
 
+import android.animation.AnimatorSet;
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-
 
 
 public class BrainInputMainActivity extends ActionBarActivity {
 
-
-    private AlphaAnimation a1,a2,a3,a4,a5;
-    private FlickeringView view2,view3,view4,view5;
-    private FlickeringViewInner view1;
-
-
+    private AnimatorSet animatorSet;
     private Button controlBTN;
     private boolean controlFlag = true;
     private Activity activity = this;
 
-    final int boxColor = Color.BLACK;
-    final int freq1= 5000/60;
+    // first
+    private ValueAnimator colorAnimationOuter1;
+    private ValueAnimator colorAnimationInner1;
+    private View view1,view2,view3,view4,view5;
+    final int freq1 = 5000/60;
+
+    // second
+    private ValueAnimator colorAnimationOuter2;
+    private ValueAnimator colorAnimationInner2;
+    private View view21,view22,view23,view24,view25;
+    final int freq2 = 5000/70;
 
 
     @Override
@@ -36,28 +38,93 @@ public class BrainInputMainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_brain_input_main);
 
-        // turn off title to provide more visible area
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-
-
-        view1 = (FlickeringViewInner) findViewById(R.id.view);
-        view2 = (FlickeringView) findViewById(R.id.view2);
-        view3 = (FlickeringView) findViewById(R.id.view3);
-        view4 = (FlickeringView) findViewById(R.id.view4);
-        view5 = (FlickeringView) findViewById(R.id.view5);
-
-
-
-        a1 = new AlphaAnimation(0.0f,1.0f);
-        a1.setDuration(freq1); //6hz
-        a1.setRepeatCount(Animation.INFINITE);
-        a1.setRepeatMode(Animation.REVERSE);
         // 5000/10 = 1hz
+        view1 = (View) findViewById(R.id.view1);
+        view2 = (View) findViewById(R.id.view2);
+        view3 = (View) findViewById(R.id.view3);
+        view4 = (View) findViewById(R.id.view4);
+        view5 = (View) findViewById(R.id.view5);
+
+        view21 = (View) findViewById(R.id.view21);
+        view22 = (View) findViewById(R.id.view22);
+        view23 = (View) findViewById(R.id.view23);
+        view24 = (View) findViewById(R.id.view24);
+        view25 = (View) findViewById(R.id.view25);
 
 
 
-        // @TODO using OPENGL ES
+
+        Integer colorFrom = Color.RED;
+        Integer colorTo = Color.WHITE;
+
+        colorAnimationOuter1 = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+        colorAnimationOuter1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+            @Override
+            public void onAnimationUpdate(ValueAnimator animator) {
+                view5.setBackgroundColor((Integer) animator.getAnimatedValue());
+                view4.setBackgroundColor((Integer) animator.getAnimatedValue());
+                view3.setBackgroundColor((Integer) animator.getAnimatedValue());
+                view2.setBackgroundColor((Integer) animator.getAnimatedValue());
+
+            }
+
+        });
+        colorAnimationInner1 = ValueAnimator.ofObject(new ArgbEvaluator(), colorTo, colorFrom);
+        colorAnimationInner1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+            @Override
+            public void onAnimationUpdate(ValueAnimator animator) {
+                view1.setBackgroundColor((Integer) animator.getAnimatedValue());
+
+            }
+
+        });
+        colorAnimationOuter1.setRepeatCount(ValueAnimator.INFINITE);
+        colorAnimationOuter1.setRepeatMode(ValueAnimator.REVERSE);
+        colorAnimationOuter1.setDuration(freq1);
+        colorAnimationInner1.setRepeatCount(ValueAnimator.INFINITE);
+        colorAnimationInner1.setRepeatMode(ValueAnimator.REVERSE);
+        colorAnimationInner1.setDuration(freq1);
+
+
+        colorAnimationOuter2 = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+        colorAnimationOuter2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+            @Override
+            public void onAnimationUpdate(ValueAnimator animator) {
+                view25.setBackgroundColor((Integer) animator.getAnimatedValue());
+                view24.setBackgroundColor((Integer) animator.getAnimatedValue());
+                view23.setBackgroundColor((Integer) animator.getAnimatedValue());
+                view22.setBackgroundColor((Integer) animator.getAnimatedValue());
+
+            }
+
+        });
+        colorAnimationOuter2.setRepeatCount(ValueAnimator.INFINITE);
+        colorAnimationOuter2.setRepeatMode(ValueAnimator.REVERSE);
+        colorAnimationOuter2.setDuration(freq2);
+
+
+        colorAnimationInner2 = ValueAnimator.ofObject(new ArgbEvaluator(), colorTo, colorFrom);
+        colorAnimationInner2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+            @Override
+            public void onAnimationUpdate(ValueAnimator animator) {
+                view21.setBackgroundColor((Integer) animator.getAnimatedValue());
+
+            }
+
+        });
+        colorAnimationInner2.setRepeatCount(ValueAnimator.INFINITE);
+        colorAnimationInner2.setRepeatMode(ValueAnimator.REVERSE);
+        colorAnimationInner2.setDuration(freq2);
+
+        // @TODO animation set
+        animatorSet = new AnimatorSet();
+        animatorSet.playTogether(colorAnimationOuter1, colorAnimationInner1,
+                colorAnimationOuter2, colorAnimationInner2);
 
 
         controlBTN = (Button) findViewById(R.id.control);
@@ -69,11 +136,8 @@ public class BrainInputMainActivity extends ActionBarActivity {
                     controlFlag = false;
                     controlBTN.setText("Stop");
                     // Start action here
-                    view1.startAnimation(a1);
-                    view2.startAnimation(a1);
-                    view3.startAnimation(a1);
-                    view4.startAnimation(a1);
-                    view5.startAnimation(a1);
+                    animatorSet.start();
+
 
 
                 }else{
@@ -81,11 +145,7 @@ public class BrainInputMainActivity extends ActionBarActivity {
                     controlFlag = true;
                     controlBTN.setText("Start");
                     // Stop action here
-                    view1.clearAnimation();
-                    view2.clearAnimation();
-                    view3.clearAnimation();
-                    view4.clearAnimation();
-                    view5.clearAnimation();
+                    animatorSet.cancel();
 
                 }
             }
